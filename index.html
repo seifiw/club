@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    form {
+      border: 3px solid #f1f1f1;
+    }
+
+    input[type=text],
+    input[type=number] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #04AA6D;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    .cancelbtn {
+      width: auto;
+      padding: 10px 18px;
+      background-color: #f44336;
+    }
+
+    .imgcontainer {
+      text-align: center;
+      margin: 0px 0 0px 0;
+    }
+
+    img.avatar {
+      width: 30%;
+      border-radius: 40%;
+    }
+
+    .container {
+      padding: 16px;
+    }
+
+    span.psw {
+      float: right;
+      padding-top: 16px;
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+      span.psw {
+        display: block;
+        float: none;
+      }
+
+      .cancelbtn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>javad game club</h2>
+
+  <form>
+    <div class="imgcontainer">
+      <img src="Xbox-logo.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container" dir="rtl">
+
+      <input type="checkbox" id="onecheckbox" value="Estimation">
+      <label>تخمین دقیقه نسبت به پول</label><br><br>
+
+      <label for="uname"><b>تعداد دسته</b></label><br>
+
+      <input type="radio" id="one" name="rmt" value="12000" required="required">
+      <label>1</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+      <input type="radio" id="two" name="rmt" value="16000">
+      <label>2</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+      <input type="radio" id="three" name="rmt" value="24000">
+      <label>3</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+      <input type="radio" id="four" name="rmt" value="32000">
+      <label>4</label><br><br>
+
+
+      <label for="uname"><b>مدت بازی</b></label><br>
+      <input type="number" id="price" placeholder="مقدار پول را وارد کنید " required><br><br>
+
+
+      <button type="submit">محاسبه</button>
+    </div>
+
+
+  </form>
+
+
+  <div id="result" style="margin-top: 30px; font-size: xx-large;" class="container imgcontainer">
+    
+  </div>
+
+  <script>
+
+    var onecheckbox = document.querySelector("#onecheckbox");
+    var btn = document.querySelector("button");
+    var rbchecked = document.getElementsByName("rmt")
+    var price = document.querySelector("#price")
+    var switcher = 0;
+
+    document.addEventListener("click", function () {
+      if (onecheckbox.checked==0) {
+        console.log("if");
+        price.placeholder = "مقدار پول را وارد کنید ";
+        btn.addEventListener("click", function (event) {
+          event.preventDefault();
+          rbchecked.forEach(function (rbchecked) {
+            if (rbchecked.checked) {
+              var endprice = (price.value / rbchecked.value) * 60
+              var endpricehours = (Math.floor(endprice / 60));
+              var endpriceMinuts = endprice - endpricehours * 60;
+              endprice = endpricehours + " : " + Math.floor(endpriceMinuts)
+              result.innerHTML = endprice;
+              console.log(endprice);
+            }
+
+          })
+        })
+      } else {
+        console.log("else");
+        price.placeholder = "مدت را به دقیقه وارد کنید";
+        btn.addEventListener("click", function (event) {
+          event.preventDefault();
+          rbchecked.forEach(function (rbchecked) {
+            if (rbchecked.checked) {
+              var endprice = (price.value / 60) * rbchecked.value
+              console.log(endprice);
+              endprice =Math.floor(endprice)
+              result.innerHTML = endprice;
+              console.log(endprice);
+            }
+
+          })
+        })
+      }
+
+    })
+    console.log(onecheckbox.checked)
+
+  </script>
+</body>
+
+</html>
